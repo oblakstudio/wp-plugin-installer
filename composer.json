@@ -1,0 +1,46 @@
+{
+    "name": "oblak/wp-plugin-installer",
+    "description": "This Module Has useful functions for validating various serbian numbers",
+    "authors": [
+        {
+            "name": "Sibin Grasic",
+            "email": "sibin.grasic@oblak.studio"
+        }
+    ],
+    "license": "GPL-2.0-only",
+    "version": "1.0.0",
+    "type": "library",
+    "require": {
+        "php" : ">= 7.3",
+        "automattic/jetpack-constants": "^1.6",
+        "woocommerce/action-scheduler": "^3.5",
+        "oblak/admin-notice-manager": "^2"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "*",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+        "wp-coding-standards/wpcs": "*",
+        "phpcompatibility/phpcompatibility-wp": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Oblak\\WP\\": "src"
+        },
+        "files": [
+            "src/oblak-plugin-installer-utils.php"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "scripts": {
+        "install-codestandards": [
+            "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
+        ],
+        "post-install-cmd": [
+            "@install-codestandards"
+        ]
+    }
+}

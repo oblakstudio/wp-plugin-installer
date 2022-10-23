@@ -1,0 +1,12 @@
+node_modules
+vendor
+test.php
+php_errors.log
+
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

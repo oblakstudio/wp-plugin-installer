@@ -1,0 +1,14 @@
+{
+    "scripts": {
+        "release:test": "node ./node_modules/semantic-release/bin/semantic-release.js --dry-run",
+        "release": "node ./node_modules/semantic-release/bin/semantic-release.js"
+    },
+    "packageManager": "yarn@3.2.4",
+    "devDependencies": {
+        "@semantic-release/changelog": "^6.0.1",
+        "@semantic-release/exec": "^6.0.3",
+        "@semantic-release/git": "^10.0.1",
+        "@semantic-release/github": "^8.0.6",
+        "semantic-release": "^19.0.5"
+    }
+}
