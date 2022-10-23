@@ -1,3 +1,10 @@
+# 1.0.0 (2022-10-23)
+
+
+### Features
+
+* Initial commit ([c503ec5](https://github.com/oblakstudio/wp-plugin-installer/commit/c503ec5635b785066c3dc00c4a1a7cb1d3275daf))
+
 # [1.1.0](https://github.com/oblakstudio/serbian-validators-php/compare/v1.0.0...v1.1.0) (2022-01-01)
 
 
