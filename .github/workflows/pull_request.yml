@@ -1,15 +1,33 @@
-name: Run PHPCS
-on: pull_request
+name: "Validate PHP Code Standards"
+on:
+  pull_request:
+    paths:
+      - "**.php"
+      - "phpcs.xml"
+      - ".github/workflows/phpcs.yml"
 jobs:
-  runPHPCSInspection:
-    name: Run PHPCS inspection
+  phpcs:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        ref: ${{ github.event.pull_request.head.sha }}
-    - name: Run PHPCS inspection
-      uses: rtCamp/action-phpcs-code-review@v2
-      env:
-        GH_BOT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SKIP_FOLDERS: "tests,.github,docs,.yarn"
+      - name: Checkout repo
+        uses: actions/checkout@v2.3.4
+        with:
+          fetch-depth: 0 # important!
+      - name: Cache Composer dependencies
+        uses: actions/cache@v2.1.6
+        with:
+          path: /tmp/composer-cache
+          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+      - name: Install composer dependencies
+        uses: php-actions/composer@v6
+        with:
+          php_version: 7.3
+          version: 2
+          dev: yes
+          quiet: yes
+          args: --optimize-autoloader --classmap-authoritative --prefer-dist
+      - uses: tinovyatkin/action-php-codesniffer@v1
+        with:
+          files: "**.php" # you may customize glob as needed
+          phpcs_path: ./vendor/bin/phpcs
+          standard: "phpcs.xml"
