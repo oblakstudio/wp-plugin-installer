@@ -1,0 +1,79 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-10-25T11:00:47+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: oblak-plugin-installer\n"
+
+#: Base_Plugin_Installer.php:102
+msgid "Plugin version not set"
+msgstr ""
+
+#: Base_Plugin_Installer.php:106
+msgid "Plugin slug not set"
+msgstr ""
+
+#: Base_Plugin_Installer.php:110
+msgid "Plugin schema version not set"
+msgstr ""
+
+#: Base_Plugin_Installer.php:247
+msgid "The following tables are missing: "
+msgstr ""
+
+#. translators: %s Database version number
+#: Base_Plugin_Installer.php:529
+msgid "No updates required. Database version is %s"
+msgstr ""
+
+#. translators: 1: Number of database updates 2: List of update callbacks
+#: Base_Plugin_Installer.php:534
+msgid "Found %1$d updates (%2$s)"
+msgstr ""
+
+#: Base_Plugin_Installer.php:536
+msgid "Updating database"
+msgstr ""
+
+#. translators: 1: Number of database updates performed 2: Database version number
+#: Base_Plugin_Installer.php:553
+msgid "%1$d update functions completed. Database version is %2$s"
+msgstr ""
+
+#: Base_Plugin_Installer.php:567
+#: Base_Plugin_Installer.php:589
+msgid "All database tables are up to date."
+msgstr ""
+
+#: Base_Plugin_Installer.php:571
+msgid "The following database tables are out of sync with the schema:"
+msgstr ""
+
+#. Translators: 1: table name, 2: result
+#: Base_Plugin_Installer.php:575
+msgid "Table %1$s: %2$s"
+msgstr ""
+
+#. Translators: 1: table name, 2: result
+#: Base_Plugin_Installer.php:575
+msgid "Missing"
+msgstr ""
+
+#: Base_Plugin_Installer.php:579
+msgid "Run the command again with --create to create the missing tables."
+msgstr ""
+
+#: Base_Plugin_Installer.php:583
+msgid "Creating missing tables..."
+msgstr ""
+
+#: Base_Plugin_Installer.php:593
+msgid "There was an error creating the missing tables."
+msgstr ""
