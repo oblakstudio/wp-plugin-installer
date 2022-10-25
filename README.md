@@ -1,9 +1,7 @@
-<center>
+<div align="center">
 
 # 📦 WordPress plugin installer / activator
-## Singleton class which simplifies the installation and activation of WordPress plugins.
-
-<hr>
+## Simplifies the installation and activation of WordPress plugins.
 
 ![Packagist Version](https://img.shields.io/packagist/v/oblak/wp-plugin-installer)
 ![Packagist PHP Version](https://img.shields.io/packagist/dependency-v/oblak/wp-plugin-installer/php)
@@ -15,7 +13,7 @@
 ![GitHub](https://img.shields.io/github/license/oblakstudio/wp-plugin-installer)
 ![Packagist Downloads](https://img.shields.io/packagist/dm/oblak/wp-plugin-installer)
 
-</center>
+</div>
 
 ## Highlights
  * Based on [WooCommerce](https://woocommerce.com) installation and activation process.
