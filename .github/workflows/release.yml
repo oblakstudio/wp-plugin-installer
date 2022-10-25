@@ -12,6 +12,7 @@ jobs:
         uses: actions/checkout@v2.5.0
         with:
           fetch-depth: 0
+          persist-credentials: false
       - name: Setup Node.js
         uses: actions/setup-node@v3.5.0
         with:
@@ -21,10 +22,7 @@ jobs:
         run: yarn install
       - name: Release
         env:
-          GIT_AUTHOR_NAME: "oblakbot"
-          GIT_AUTHOR_EMAIL: "sibin.grasic+bot@oblak.studio"
-          GIT_COMMITTER_NAME: "oblakbot"
-          GIT_COMMITTER_EMAIL: 'sibin.grasic+bot@oblak.studio'
-          GITHUB_TOKEN: ${{ secrets.OBLAK_BOT_TOKEN }}
+          GH_TOKEN: ${{ secrets.OBLAK_BOT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: yarn release
 
