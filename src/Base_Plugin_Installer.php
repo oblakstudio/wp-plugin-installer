@@ -4,7 +4,6 @@
  *
  * @package Plugin Installer
  * @link https://plugin-installer.wp.rs
- * @author Sibin Grasic <sibin.grasic@oblak.studio>
  */
 
 namespace Oblak\WP;
