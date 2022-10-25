@@ -71,6 +71,13 @@ abstract class Base_Plugin_Installer {
     protected $has_db_tables = false;
 
     /**
+     * Wheter to show admin notices
+     *
+     * @var bool
+     */
+    protected $show_admin_notices = true;
+
+    /**
      * Class constructor
      */
     protected function __construct() {
@@ -143,6 +150,15 @@ abstract class Base_Plugin_Installer {
     }
 
     /**
+     * Checks if this is a new install or an update
+     *
+     * @return bool
+     */
+    public function is_new_install() {
+        return is_null( get_option( "{$this->slug}_version", null ) );
+    }
+
+    /**
      * Checks the plugin version and runs the updater if required
      */
     final public function check_version() {
@@ -180,16 +196,14 @@ abstract class Base_Plugin_Installer {
         $this->maybe_update_db_version();
         $this->update_plugin_version();
 
-        /**
-         * Fires after the base installation steps are completed
-         *
-         * @param string         $version        Plugin version.
-         * @param string         $db_version Plugin schema version.
-         * @param Base_Installer $this           Base_Installer instance.
-         *
-         * @since 1.0.0
-         */
-        do_action( "{$this->slug}_install", $this->version, $this->db_version, $this );
+        if ( $this->is_new_install() ) {
+            /**
+             * Fires after the base installation steps are completed
+             *
+             * @since 1.0.0
+             */
+            do_action( "{$this->slug}_install" );
+        }
 
         delete_transient( "{$this->slug}_installing" );
     }
@@ -199,7 +213,6 @@ abstract class Base_Plugin_Installer {
      * WARNING: If you're fucking around with this method, make sure that it's safe to call regardless of the state of the database.
      *
      * This is called from install method above and runs only when installing or updating the plugin.
-     * Optionally, can be called from the tools section of WooCommerce
      *
      * @since 2.0.0
      */
@@ -246,7 +259,7 @@ abstract class Base_Plugin_Installer {
         }
 
         if ( count( $missing_tables ) > 0 ) {
-            if ( $modify_notice ) {
+            if ( $modify_notice && $this->show_admin_notices ) {
                 Admin_Notice_Manager::get_instance()->add_notice(
                     "{$this->slug}_missing_tables",
                     array(
@@ -265,7 +278,7 @@ abstract class Base_Plugin_Installer {
                 );
             }
         } else {
-            if ( $modify_notice ) {
+            if ( $modify_notice && $this->show_admin_notices ) {
                 Admin_Notice_Manager::get_instance()->remove_notice( "{$this->slug}_missing_tables", true );
             }
             update_option( "{$this->slug}_db_version", $this->db_version );
@@ -280,6 +293,10 @@ abstract class Base_Plugin_Installer {
      * @return void
      */
     protected function add_admin_update_notice() {
+        if ( ! $this->show_admin_notices ) {
+            return;
+        }
+
         $file_name = '';
         if ( $this->needs_db_update() ) {
             $next_scheduled_date = as_next_scheduled_action( "{$this->slug}_run_update_callback", null, "{$this->slug}-db-updates" );
@@ -314,7 +331,7 @@ abstract class Base_Plugin_Installer {
          *
          * @since 1.0.0
          */
-        $file_args = apply_filters( 'plugin_installer_update_notice_args', $file_args, $this->slug, $file_name );
+        $file_args = apply_filters( "{$this->slug}_update_notice_args", $file_args, $file_name );
 
         Admin_Notice_Manager::get_instance()->add_notice(
             "{$this->slug}_update_notice",
@@ -348,7 +365,7 @@ abstract class Base_Plugin_Installer {
          *
          * @since 1.0.0
          */
-        return apply_filters( "{$this->slug}_get_notice_template_file", $default_path, $template_name );
+        return apply_filters( "{$this->slug}_get_update_notice_template_file", $default_path, $template_name );
     }
 
     /**
@@ -373,7 +390,7 @@ abstract class Base_Plugin_Installer {
     final protected function maybe_update_db_version() {
         if ( $this->needs_db_update() ) {
             //phpcs:ignore
-            if ( apply_filters( "{$this->slug}_enable_auto_update_db", false ) ) {
+            if ( apply_filters( "{$this->slug}_enable_auto_update_db", !$this->show_admin_notices ) ) {
                 $this->update();
             } else {
                 $this->add_admin_update_notice();
