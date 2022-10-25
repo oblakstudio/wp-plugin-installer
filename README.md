@@ -89,7 +89,7 @@ class My_Plugin_Installer extends Base_Plugin_Installer {
 
     return
     "
-    CREATE TABLE `{$this->get_table_name()}` (
+    CREATE TABLE `{$wpdb->prefix}my_plugin_table` (
       ID bigint(20) NOT NULL AUTO_INCREMENT,
       name varchar(255) NOT NULL,
       created_at datetime NOT NULL,
