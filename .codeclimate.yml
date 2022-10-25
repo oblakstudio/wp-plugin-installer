@@ -3,6 +3,19 @@ ratings:
   paths:
   - "**.php"
 checks:
-  method-lines:
+  file-lines:
+    enabled: true
+    config:
+      threshold: 500
+  method-complexity:
+    enabled: true
+    config:
+      threshold: 10
+  method-count:
+    enabled: true
     config:
       threshold: 50
+  method-lines:
+    config:
+      threshold: 75
+
