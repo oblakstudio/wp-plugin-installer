@@ -11,5 +11,5 @@ jobs:
     - name: Run PHPCS inspection
       uses: rtCamp/action-phpcs-code-review@v2
       env:
-        GH_BOT_TOKEN: ${{ secrets.OBLAK_BOT_TOKEN }}
+        GH_BOT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SKIP_FOLDERS: "tests,.github,docs,.yarn"
