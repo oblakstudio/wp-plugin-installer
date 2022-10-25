@@ -1,7 +1,7 @@
 <div align="center">
 
-# 📦 WordPress plugin installer / activator
-## Simplifies the installation and activation of WordPress plugins.
+<h1 align="center" style="border-bottom: none;">📦 WordPress plugin installer / activator</h1>
+<h3 align="center">Simplifies the installation and activation of WordPress plugins.</h3>
 
 ![Packagist Version](https://img.shields.io/packagist/v/oblak/wp-plugin-installer)
 ![Packagist PHP Version](https://img.shields.io/packagist/dependency-v/oblak/wp-plugin-installer/php)
