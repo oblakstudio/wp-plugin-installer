@@ -24,7 +24,7 @@ abstract class Base_Plugin_Installer {
     /**
      * Class instance
      *
-     * @var Base_Installer
+     * @var Base_Plugin_Installer
      */
     protected static $instance = null;
 
@@ -88,7 +88,7 @@ abstract class Base_Plugin_Installer {
     /**
      * Class instance getter
      *
-     * @return Base_Installer
+     * @return Base_Plugin_Installer
      */
     public static function get_instance() {
         return static::$instance ?? static::$instance = new static(); // phpcs:ignore
