@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/oblakstudio/wp-plugin-installer/compare/v1.1.1...v1.2.0) (2022-11-03)
+
+
+### Features
+
+* Fixed wrong constant ([64feec2](https://github.com/oblakstudio/wp-plugin-installer/commit/64feec277b65b041a6f2bd817dae600535aa2d39))
+
 ## [1.1.1](https://github.com/oblakstudio/wp-plugin-installer/compare/v1.1.0...v1.1.1) (2022-10-25)
 
 
