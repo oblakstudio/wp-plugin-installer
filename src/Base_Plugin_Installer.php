@@ -162,10 +162,10 @@ abstract class Base_Plugin_Installer {
      * Checks the plugin version and runs the updater if required
      */
     final public function check_version() {
-        if ( ! Constants::is_defined( 'IFRAME_REQUEST' ) && version_compare( get_option( "{$this->slug}_version", '0.0.1' ), WSS_SUPPLIER_VERSION, '<' ) ) {
+        if ( ! Constants::is_defined( 'IFRAME_REQUEST' ) && version_compare( get_option( "{$this->slug}_version", '0.0.1' ), $this->version, '<' ) ) {
             $this->install();
             /**
-             * Action fired after supplier module is updated
+             * Action fired after plugin is updated
              *
              * @since 5.4.0
              */
