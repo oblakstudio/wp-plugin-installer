@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/oblakstudio/wp-plugin-installer/compare/v1.2.0...v1.2.1) (2022-11-03)
+
+
+### Bug Fixes
+
+* Fixed docblock ([f0d0fd1](https://github.com/oblakstudio/wp-plugin-installer/commit/f0d0fd16c698610fc87d58c78dd45a1b64b001a4))
+
 # [1.2.0](https://github.com/oblakstudio/wp-plugin-installer/compare/v1.1.1...v1.2.0) (2022-11-03)
 
 
