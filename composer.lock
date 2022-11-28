@@ -4,24 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "439ea5a9e38972a215de50dc2b0a36d0",
+    "content-hash": "9ba9c6e4eadce510c688d1ee578e9c79",
     "packages": [
         {
             "name": "automattic/jetpack-constants",
-            "version": "v1.6.18",
+            "version": "v1.6.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Automattic/jetpack-constants.git",
-                "reference": "22fea671b3c621de63088cd0a2ff129683024023"
+                "reference": "a224991e11045e15250bac415cf92788e0b59bb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Automattic/jetpack-constants/zipball/22fea671b3c621de63088cd0a2ff129683024023",
-                "reference": "22fea671b3c621de63088cd0a2ff129683024023",
+                "url": "https://api.github.com/repos/Automattic/jetpack-constants/zipball/a224991e11045e15250bac415cf92788e0b59bb7",
+                "reference": "a224991e11045e15250bac415cf92788e0b59bb7",
                 "shasum": ""
             },
             "require-dev": {
-                "automattic/jetpack-changelogger": "^3.2",
+                "automattic/jetpack-changelogger": "^3.2.1",
                 "brain/monkey": "2.6.1",
                 "yoast/phpunit-polyfills": "1.0.3"
             },
@@ -47,9 +47,9 @@
             ],
             "description": "A wrapper for defining constants in a more testable way.",
             "support": {
-                "source": "https://github.com/Automattic/jetpack-constants/tree/v1.6.18"
+                "source": "https://github.com/Automattic/jetpack-constants/tree/v1.6.19"
             },
-            "time": "2022-07-26T13:41:20+00:00"
+            "time": "2022-11-22T17:02:34+00:00"
         },
         {
             "name": "oblak/admin-notice-manager",
