@@ -18,7 +18,7 @@
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "*",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1 || ^1.0.0",
         "wp-coding-standards/wpcs": "*",
         "phpcompatibility/phpcompatibility-wp": "*"
     },
