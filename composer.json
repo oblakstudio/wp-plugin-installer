@@ -1,6 +1,6 @@
 {
     "name": "oblak/wp-plugin-installer",
-    "description": "This Module Has useful functions for validating various serbian numbers",
+    "description": "Simplifies the installation and activation of WordPress plugins",
     "authors": [
         {
             "name": "Sibin Grasic",
