@@ -2,13 +2,13 @@
 
 ``Base_Plugin_Installer`` class does the bare minimum by itself. It's meant to be extended and customized to fit your needs.
 At bare minimum you can extend the class and implement the ``set_defaults()`` method, which is responsible for setting the default values for the class.
-This will only get you the plugin version tracking. If you want to track database schema version, you need to implement the ``get_schema()`` method, and set the ``has_tables`` property to ``true``.
+This will only get you the plugin version tracking. If you want to track database schema version, you need to implement the ``get_schema()`` method, and set the ``has_db_tables`` property to ``true``.
 
 ## Database schema enforcement
 
 The installer class provides a way to enforce the database schema. This means that the installer will automatically create the database tables, and update them when the plugin is updated.
 
-In order to utilize this feature, you need to implement the ``get_schema()`` method, and set the ``has_tables`` property to ``true``.
+In order to utilize this feature, you need to implement the ``get_schema()`` method, and set the ``has_db_tables`` property to ``true``.
 
 ?> Schema enforcement is based on the [WooCommerce](https://woocommerce.com) schema enforcement. It uses the ``dbDelta()`` function to create and update the database tables.
 

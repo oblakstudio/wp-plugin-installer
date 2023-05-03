@@ -4,11 +4,11 @@ Class configuration is done by overriding the `set_defaults()` method. This meth
 
 ```php
 protected function set_defaults() {
-  $this->name       = 'My Plugin';
-  $this->slug       = 'my-plugin';
-  $this->version    = '1.0.0';    
-  $this->db_version = '1.0.0';    
-  $this->has_tables = true;       
+  $this->name          = 'My Plugin';
+  $this->slug          = 'my-plugin';
+  $this->version       = '1.0.0';    
+  $this->db_version    = '1.0.0';    
+  $this->has_db_tables = true;       
 }
 ```
 ## name
@@ -38,7 +38,7 @@ The database schema version.
 Database schema version is used in order to determine if the database schema needs to be updated.
 Incrementing this value will run the update callbacks
 
-## has_tables
+## has_db_tables
 
 Whether the plugin has database tables.
 If this is set to `true`, the installer will create and update the database tables.
