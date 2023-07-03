@@ -3,7 +3,7 @@
         "release:test": "node ./node_modules/semantic-release/bin/semantic-release.js --dry-run",
         "release": "node ./node_modules/semantic-release/bin/semantic-release.js"
     },
-    "packageManager": "yarn@4.0.0-rc.43",
+    "packageManager": "yarn@4.0.0-rc.48",
     "devDependencies": {
         "@semantic-release/changelog": "^6.0.3",
         "@semantic-release/exec": "^6.0.3",
