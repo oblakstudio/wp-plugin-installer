@@ -36,7 +36,7 @@ composer require oblak/wp-plugin-installer
 ``Base_Plugin_Installer`` is an **abstract** singleton class which can be extended to create a plugin installer class. The class is responsible for installing and activating the plugin, and updating the plugin and database schema versions.
 You need to extend it and implement the ``set_defaults()`` method, which is responsible for setting the default values for the class.
 
-If your plugin needs non-wp database tables, you need to implement the ``get_schema()`` method, and set the ``has_tables`` property to ``true``, so that the installer can create and update the tables.
+If your plugin needs non-wp database tables, you need to implement the ``get_schema()`` method, and set the ``has_db_tables`` property to ``true``, so that the installer can create and update the tables.
 
 Class depends on [Action Scheduler](https://actionscheduler.org) for running update callbacks in the background.
 If your plugin uses Action Scheduler, or depends on an another plugin, which has Action Scheduler, you can skip the activation step.
@@ -64,11 +64,11 @@ class My_Plugin_Installer extends Base_Plugin_Installer {
    * Set the installer defaults.
    */
   protected function set_defaults() {
-    $this->name       = 'My Plugin'; // Plugin name.
-    $this->slug       = 'my-plugin'; // Plugin slug.
-    $this->version    = '1.0.0';     // Plugin version (current).
-    $this->db_version = '1.0.0';     // Database schema version (current).
-    $this->has_tables = true;        // Does the plugin have database tables?
+    $this->name          = 'My Plugin'; // Plugin name.
+    $this->slug          = 'my-plugin'; // Plugin slug.
+    $this->version       = '1.0.0';     // Plugin version (current).
+    $this->db_version    = '1.0.0';     // Database schema version (current).
+    $this->has_db_tables = true;        // Does the plugin have database tables?
   }
 
   /**

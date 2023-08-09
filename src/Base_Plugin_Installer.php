@@ -193,6 +193,9 @@ abstract class Base_Plugin_Installer {
             $this->verify_base_tables();
         }
 
+        $this->create_options();
+        $this->create_roles();
+        $this->setup_environment();
         $this->maybe_update_db_version();
         $this->update_plugin_version();
 
@@ -286,6 +289,28 @@ abstract class Base_Plugin_Installer {
 
         return $missing_tables;
     }
+
+    /**
+     * Creates the default plugin options, if needed
+     */
+    public function create_options() {}
+
+    /**
+     * Creates the default roles for the plugin.
+     */
+    public function create_roles() {}
+
+    /**
+     * Sets up the plugin environment
+     *
+     * CPT registration, taxonomies, etc.
+     */
+    public function setup_environment(){}
+
+    /**
+     * Creates terms for the plugin.
+     */
+    public function create_terms() {}
 
     /**
      * Adds the admin update notice.

@@ -1,6 +1,6 @@
 {
     "name": "oblak/wp-plugin-installer",
-    "description": "This Module Has useful functions for validating various serbian numbers",
+    "description": "Simplifies the installation and activation of WordPress plugins",
     "authors": [
         {
             "name": "Sibin Grasic",
@@ -8,7 +8,7 @@
         }
     ],
     "license": "GPL-2.0-only",
-    "version": "1.2.1",
+    "version": "1.3.0",
     "type": "library",
     "require": {
         "php" : ">= 7.3",

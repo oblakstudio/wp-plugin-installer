@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/oblakstudio/wp-plugin-installer/compare/v1.2.1...v1.3.0) (2023-05-03)
+
+
+### Features
+
+* Added additional installation steps ([ab8fbfc](https://github.com/oblakstudio/wp-plugin-installer/commit/ab8fbfc04c1547496437ac661d548beeae1c4d30))
+* Added additional installation steps ([a9fa4a1](https://github.com/oblakstudio/wp-plugin-installer/commit/a9fa4a1313fb9da49158f1410195929b6ba2871f))
+
 ## [1.2.1](https://github.com/oblakstudio/wp-plugin-installer/compare/v1.2.0...v1.2.1) (2022-11-03)
 
 
