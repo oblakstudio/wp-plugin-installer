@@ -1,14 +1,14 @@
 {
     "scripts": {
-        "release:test": "node ./node_modules/semantic-release/bin/semantic-release.js --dry-run",
-        "release": "node ./node_modules/semantic-release/bin/semantic-release.js"
+        "release:test": "semantic-release --dry-run",
+        "release": "semantic-release"
     },
-    "packageManager": "yarn@4.0.0-rc.43",
     "devDependencies": {
         "@semantic-release/changelog": "^6.0.3",
         "@semantic-release/exec": "^6.0.3",
         "@semantic-release/git": "^10.0.1",
-        "@semantic-release/github": "^8.0.7",
-        "semantic-release": "^21.0.2"
-    }
+        "@semantic-release/github": "^9.0.4",
+        "semantic-release": "^21.0.7"
+    },
+    "packageManager": "yarn@3.6.1"
 }
