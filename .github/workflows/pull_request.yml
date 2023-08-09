@@ -14,7 +14,7 @@ jobs:
         with:
           fetch-depth: 0 # important!
       - name: Cache Composer dependencies
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.8
         with:
           path: /tmp/composer-cache
           key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
