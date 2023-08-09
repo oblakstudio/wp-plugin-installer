@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "84c45d711a34c8c858460630b2be6ea7",
+    "content-hash": "db22a38ba15a2a321deda65adda007f8",
     "packages": [
         {
             "name": "automattic/jetpack-constants",
@@ -19,34 +18,15 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/Automattic/jetpack-constants/zipball/7b5c44d763c7b0dd7498be2b41a89bfefe84834c",
                 "reference": "7b5c44d763c7b0dd7498be2b41a89bfefe84834c",
-=======
-    "content-hash": "923e46c79eb9d9169ebdd2bc6c17bc4e",
-    "packages": [
-        {
-            "name": "automattic/jetpack-constants",
-            "version": "v1.6.21",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Automattic/jetpack-constants.git",
-                "reference": "e5730da0adc94e8513539818b4a3cce10943bf20"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Automattic/jetpack-constants/zipball/e5730da0adc94e8513539818b4a3cce10943bf20",
-                "reference": "e5730da0adc94e8513539818b4a3cce10943bf20",
->>>>>>> 5285e710b94d0ad1af1daf6a1488e5eca18cba66
                 "shasum": ""
             },
             "require-dev": {
                 "automattic/jetpack-changelogger": "^3.3.2",
                 "brain/monkey": "2.6.1",
                 "yoast/phpunit-polyfills": "1.0.4"
-<<<<<<< HEAD
             },
             "suggest": {
                 "automattic/jetpack-autoloader": "Allow for better interoperability with other plugins that use this package."
-=======
->>>>>>> 5285e710b94d0ad1af1daf6a1488e5eca18cba66
             },
             "type": "jetpack-library",
             "extra": {
@@ -70,15 +50,9 @@
             ],
             "description": "A wrapper for defining constants in a more testable way.",
             "support": {
-<<<<<<< HEAD
                 "source": "https://github.com/Automattic/jetpack-constants/tree/v1.6.22"
             },
             "time": "2023-04-10T11:43:45+00:00"
-=======
-                "source": "https://github.com/Automattic/jetpack-constants/tree/v1.6.21"
-            },
-            "time": "2023-02-20T19:47:20+00:00"
->>>>>>> 5285e710b94d0ad1af1daf6a1488e5eca18cba66
         },
         {
             "name": "oblak/admin-notice-manager",
@@ -122,16 +96,16 @@
         },
         {
             "name": "woocommerce/action-scheduler",
-            "version": "3.5.4",
+            "version": "3.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/woocommerce/action-scheduler.git",
-                "reference": "9533e71b0eba4a519721dde84a34dfb161f11eb8"
+                "reference": "7fd383cad3d64b419ec81bcd05bab44355a6e6ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/9533e71b0eba4a519721dde84a34dfb161f11eb8",
-                "reference": "9533e71b0eba4a519721dde84a34dfb161f11eb8",
+                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/7fd383cad3d64b419ec81bcd05bab44355a6e6ef",
+                "reference": "7fd383cad3d64b419ec81bcd05bab44355a6e6ef",
                 "shasum": ""
             },
             "require-dev": {
@@ -156,9 +130,9 @@
             "homepage": "https://actionscheduler.org/",
             "support": {
                 "issues": "https://github.com/woocommerce/action-scheduler/issues",
-                "source": "https://github.com/woocommerce/action-scheduler/tree/3.5.4"
+                "source": "https://github.com/woocommerce/action-scheduler/tree/3.6.1"
             },
-            "time": "2023-01-17T20:20:43+00:00"
+            "time": "2023-06-14T19:23:12+00:00"
         }
     ],
     "packages-dev": [
