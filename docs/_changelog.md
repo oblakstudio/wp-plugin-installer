@@ -1,3 +1,11 @@
+## [1.3.1](https://github.com/oblakstudio/wp-plugin-installer/compare/v1.3.0...v1.3.1) (2023-08-09)
+
+
+### Bug Fixes
+
+* **Build:** Reworked build process ([29b4131](https://github.com/oblakstudio/wp-plugin-installer/commit/29b4131bb51024ecd88a83d3fcf61fc27661c3a5))
+* Fixed codeowners ([da7bb2c](https://github.com/oblakstudio/wp-plugin-installer/commit/da7bb2cec5e826155d6c90c3524ad7618a54f6c1))
+
 # [1.3.0](https://github.com/oblakstudio/wp-plugin-installer/compare/v1.2.1...v1.3.0) (2023-05-03)
 
 
