@@ -24,9 +24,9 @@ abstract class Base_Plugin_Installer {
     /**
      * Class instance
      *
-     * @var Base_Plugin_Installer
+     * @var Base_Plugin_Installer[]
      */
-    protected static $instance = null;
+    protected static $instances = [];
 
     /**
      * Array of DB Update callbacks
@@ -91,7 +91,21 @@ abstract class Base_Plugin_Installer {
      * @return Base_Plugin_Installer
      */
     public static function get_instance() {
-        return static::$instance ?? static::$instance = new static(); // phpcs:ignore
+        $called_class = static::class_basename(static::class);
+
+        return static::$instances[$called_class] ?? static::$instances[$called_class] = new static(); // phpcs:ignore
+    }
+
+    /**
+     * Get the class "basename" of the given object / class.
+     *
+     * @param  string|object  $class
+     * @return string
+     */
+    private static function class_basename($class) {
+        $class = is_object($class) ? get_class($class) : $class;
+
+        return basename(str_replace('\\', '/', $class));
     }
 
     /**
