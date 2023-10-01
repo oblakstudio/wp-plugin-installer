@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/oblakstudio/wp-plugin-installer/compare/v1.3.1...v1.4.0) (2023-10-01)
+
+
+### Features
+
+* Implemented multi-singleton ([2ff6062](https://github.com/oblakstudio/wp-plugin-installer/commit/2ff6062fdea23be59abc2b18149a999c75e96dca))
+
 ## [1.3.1](https://github.com/oblakstudio/wp-plugin-installer/compare/v1.3.0...v1.3.1) (2023-08-09)
 
 
