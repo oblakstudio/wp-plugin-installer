@@ -11,16 +11,13 @@
     "version": "0.0.0",
     "type": "library",
     "require": {
-        "php": ">= 7.3",
+        "php": ">= 7.4 | < 8.1",
         "automattic/jetpack-constants": "^1.6",
         "woocommerce/action-scheduler": "^3.5",
         "oblak/admin-notice-manager": "^2"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "*",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1 || ^1.0.0",
-        "wp-coding-standards/wpcs": "*",
-        "phpcompatibility/phpcompatibility-wp": "*"
+        "oblak/wordpress-coding-standard": "^1"
     },
     "autoload": {
         "psr-4": {
@@ -31,6 +28,11 @@
         ]
     },
     "config": {
+        "classmap-authoritative": true,
+        "optimize-autoloader": true,
+        "platform": {
+            "php": "7.4"
+        },
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
