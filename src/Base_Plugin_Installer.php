@@ -1,4 +1,4 @@
-<?php
+<?php //phpcs:disable WordPress.WP.I18n.TextDomainMismatch
 /**
  * Base_Installer class file.
  *
@@ -20,20 +20,12 @@ use function WP_CLI\Utils\make_progress_bar;
  * Base Installer class from which all installers derive.
  */
 abstract class Base_Plugin_Installer {
-
     /**
      * Class instance
      *
      * @var Base_Plugin_Installer[]
      */
-    protected static $instances = [];
-
-    /**
-     * Array of DB Update callbacks
-     *
-     * @var array
-     */
-    protected $db_updates = array();
+    protected static $instances = array();
 
     /**
      * Full plugin name
@@ -61,14 +53,7 @@ abstract class Base_Plugin_Installer {
      *
      * @var string
      */
-    protected $db_version = '';
-
-    /**
-     * Flag to indicate if the plugin has DB tables
-     *
-     * @var bool
-     */
-    protected $has_db_tables = false;
+    protected $db_version = null;
 
     /**
      * Wheter to show admin notices
@@ -83,29 +68,29 @@ abstract class Base_Plugin_Installer {
     protected function __construct() {
         $this->set_defaults();
         $this->verify_defaults();
+
+        $this->db_version = $this->db_version ?? $this->version;
     }
 
     /**
-     * Class instance getter
+     * Returns the singleton instance
      *
-     * @return Base_Plugin_Installer
+     * @return static
      */
-    public static function get_instance() {
-        $called_class = static::class_basename(static::class);
-
-        return static::$instances[$called_class] ?? static::$instances[$called_class] = new static(); // phpcs:ignore
+    final public static function instance() {
+        return static::$instances[ static::class_basename( static::class ) ] ??= new static();
     }
 
     /**
      * Get the class "basename" of the given object / class.
      *
-     * @param  string|object  $class
+     * @param  string|object $classname Class name or object.
      * @return string
      */
-    private static function class_basename($class) {
-        $class = is_object($class) ? get_class($class) : $class;
+    private static function class_basename( $classname ) {
+        $classname = is_object( $classname ) ? get_class( $classname ) : $classname;
 
-        return basename(str_replace('\\', '/', $class));
+        return basename( str_replace( '\\', '/', $classname ) );
     }
 
     /**
@@ -122,15 +107,15 @@ abstract class Base_Plugin_Installer {
      */
     final protected function verify_defaults() {
         if ( '' === $this->version ) {
-            throw new Exception( __( 'Plugin version not set', 'oblak-plugin-installer' ) );
+            throw new Exception( esc_html__( 'Plugin version not set', 'oblak-plugin-installer' ) );
         }
 
         if ( '' === $this->slug ) {
-            throw new Exception( __( 'Plugin slug not set', 'oblak-plugin-installer' ) );
+            throw new Exception( esc_html__( 'Plugin slug not set', 'oblak-plugin-installer' ) );
         }
 
-        if ( '' === $this->db_version && $this->has_db_tables ) {
-            throw new Exception( __( 'Plugin schema version not set', 'oblak-plugin-installer' ) );
+        if ( '' === $this->db_version && ! empty( $this->get_schema() ) ) {
+            throw new Exception( esc_html__( 'Plugin schema version not set', 'oblak-plugin-installer' ) );
         }
     }
 
@@ -150,7 +135,6 @@ abstract class Base_Plugin_Installer {
      * Loads our textdomain file for translations
      */
     final public function load_textdomain() {
-
         $locale = get_locale();
 
         $mofile_path = dirname( __DIR__ ) . "/languages/oblak-plugin-installer-{$locale}.mo";
@@ -160,7 +144,6 @@ abstract class Base_Plugin_Installer {
         }
 
         load_textdomain( 'oblak-plugin-installer', $mofile_path );
-
     }
 
     /**
@@ -176,7 +159,11 @@ abstract class Base_Plugin_Installer {
      * Checks the plugin version and runs the updater if required
      */
     final public function check_version() {
-        if ( ! Constants::is_defined( 'IFRAME_REQUEST' ) && version_compare( get_option( "{$this->slug}_version", '0.0.1' ), $this->version, '<' ) ) {
+        $plugin_version = get_option( "{$this->slug}_version" );
+        $code_version   = $this->version;
+        $needs_update   = version_compare( $plugin_version, $code_version, '<' );
+
+        if ( ! Constants::is_defined( 'IFRAME_REQUEST' ) && $needs_update ) {
             $this->install();
             /**
              * Action fired after plugin is updated
@@ -191,18 +178,14 @@ abstract class Base_Plugin_Installer {
      * Runs the plugin installation
      */
     final public function install() {
-        if ( ! is_blog_installed() ) {
-            return;
-        }
-
-        if ( get_transient( "{$this->slug}_installing" ) === 'yes' ) {
+        if ( ! is_blog_installed() || get_transient( "{$this->slug}_installing" ) === 'yes' ) {
             return;
         }
 
         set_transient( "{$this->slug}_installing", 'yes', MINUTE_IN_SECONDS * 5 );
-        maybe_define_constant( strtoupper( $this->slug ) . '_INSTALLING', true );
+        Constants::set_constant( str_replace( '-', '_', strtoupper( $this->slug ) . '_INSTALLING' ), true );
 
-        if ( $this->has_db_tables ) {
+        if ( $this->get_schema() ) {
             $this->create_tables();
             $this->verify_base_tables();
         }
@@ -210,8 +193,9 @@ abstract class Base_Plugin_Installer {
         $this->create_options();
         $this->create_roles();
         $this->setup_environment();
-        $this->maybe_update_db_version();
+        $this->create_terms();
         $this->update_plugin_version();
+        $this->maybe_update_db_version();
 
         if ( $this->is_new_install() ) {
             /**
@@ -248,8 +232,8 @@ abstract class Base_Plugin_Installer {
      *
      * @return string Table schema
      */
-    protected function get_schema() {
-        return '';
+    protected function get_schema(): ?string {
+        return null;
     }
 
     /**
@@ -275,7 +259,7 @@ abstract class Base_Plugin_Installer {
             }
         }
 
-        if ( count( $missing_tables ) > 0 ) {
+        if ( 0 < count( $missing_tables ) ) {
             if ( $modify_notice && $this->show_admin_notices ) {
                 Admin_Notice_Manager::get_instance()->add_notice(
                     "{$this->slug}_missing_tables",
@@ -298,7 +282,7 @@ abstract class Base_Plugin_Installer {
             if ( $modify_notice && $this->show_admin_notices ) {
                 Admin_Notice_Manager::get_instance()->remove_notice( "{$this->slug}_missing_tables", true );
             }
-            update_option( "{$this->slug}_db_version", $this->db_version );
+            update_option( "{$this->slug}_schema_version", $this->db_version );
         }
 
         return $missing_tables;
@@ -307,24 +291,28 @@ abstract class Base_Plugin_Installer {
     /**
      * Creates the default plugin options, if needed
      */
-    public function create_options() {}
+    public function create_options() {
+    }
 
     /**
      * Creates the default roles for the plugin.
      */
-    public function create_roles() {}
+    public function create_roles() {
+    }
 
     /**
      * Sets up the plugin environment
      *
      * CPT registration, taxonomies, etc.
      */
-    public function setup_environment(){}
+    public function setup_environment() {
+    }
 
     /**
      * Creates terms for the plugin.
      */
-    public function create_terms() {}
+    public function create_terms() {
+    }
 
     /**
      * Adds the admin update notice.
@@ -337,7 +325,7 @@ abstract class Base_Plugin_Installer {
         }
 
         $file_name = '';
-        if ( $this->needs_db_update() ) {
+        if ( $this->get_update_handler()?->needs_update() ) {
             $next_scheduled_date = as_next_scheduled_action( "{$this->slug}_run_update_callback", null, "{$this->slug}-db-updates" );
 
             //phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -364,9 +352,9 @@ abstract class Base_Plugin_Installer {
         /**
          * Filters the template variables for the admin update notice.
          *
-         * @param array  $file_args   Template variables.
-         * @param string $plugin_slug Plugin slug.
-         * @param string $file_name   Template name.
+         * @param  array  $file_args   Template variables.
+         * @param  string $file_name   Template name.
+         * @return array
          *
          * @since 1.0.0
          */
@@ -384,7 +372,6 @@ abstract class Base_Plugin_Installer {
             ),
             true
         );
-
     }
 
     /**
@@ -399,8 +386,9 @@ abstract class Base_Plugin_Installer {
         /**
          * Filters the template path for the plugin.
          *
-         * @param string $default_path  Default template path.
-         * @param string $template_name  Template name.
+         * @param  string $default_path  Default template path.
+         * @param  string $template_name Template name.
+         * @return string
          *
          * @since 1.0.0
          */
@@ -408,26 +396,10 @@ abstract class Base_Plugin_Installer {
     }
 
     /**
-     * Update plugin version to current.
-     */
-    final public function update_plugin_version() {
-        update_option( "{$this->slug}_version", $this->version );
-    }
-
-    /**
-     * Update DB version to current.
-     *
-     * @param string|null $version New plugin DB version or null.
-     */
-    final public function update_db_version( $version = null ) {
-        update_option( "{$this->slug}_db_version", is_null( $version ) ? $this->version : $version );
-    }
-
-    /**
      * See if we need to show or run database updates during install.
      */
     final protected function maybe_update_db_version() {
-        if ( $this->needs_db_update() ) {
+        if ( $this->get_update_handler()?->needs_update() ) {
             //phpcs:ignore
             if ( apply_filters( "{$this->slug}_enable_auto_update_db", !$this->show_admin_notices ) ) {
                 $this->update();
@@ -440,50 +412,23 @@ abstract class Base_Plugin_Installer {
     }
 
     /**
-     * Is a DB update needed?
-     *
-     * @return boolean
-     */
-    final public function needs_db_update() {
-        $current_db_version = get_option( "{$this->slug}_db_version", null );
-        $updates            = $this->get_db_update_callbacks();
-        $update_versions    = array_keys( $updates );
-        usort( $update_versions, 'version_compare' );
-
-        return ! is_null( $current_db_version ) && version_compare( $current_db_version, end( $update_versions ), '<' );
-    }
-
-    /**
-     * Push all needed DB updates to the queue for processing.
+     * Push all needed updates to the queue for processing.
      */
     final public function update() {
-        $current_db_version = get_option( "{$this->slug}_db_version" );
-        $loop               = 0;
+        $current_version = get_option( "{$this->slug}_db_version", null );
 
-        foreach ( $this->get_db_update_callbacks() as $version => $update_callbacks ) {
-            if ( version_compare( $current_db_version, $version, '<' ) ) {
-                foreach ( $update_callbacks as $update_callback ) {
-                    as_schedule_single_action(
-                        time() + $loop,
-                        "{$this->slug}_run_update_callback",
-                        array(
-                            'update_callback' => $update_callback,
-                        ),
-                        "{$this->slug}-db-updates"
-                    );
-                    $loop++;
-                }
-            }
+        if ( $current_version ) {
+            $this->get_update_handler()?->update( $current_version );
         }
     }
 
     /**
-     * Get file path for the file that contains the update callbacks.
+     * Get the update callback handler.
      *
-     * @return string
+     * @return Update_Callback_Handler
      */
-    protected function get_update_functions_file() {
-        return '';
+    protected function get_update_handler(): ?Update_Callback_Handler {
+        return null;
     }
 
     /**
@@ -492,42 +437,7 @@ abstract class Base_Plugin_Installer {
      * @param string $update_callback Callback name.
      */
     final public function run_update_callback( $update_callback ) {
-        if ( '' !== $this->get_update_functions_file() ) {
-            include_once $this->get_update_functions_file();
-        }
-
-        if ( is_callable( $update_callback ) ) {
-            $this->update_callback_start( $update_callback );
-            $result = (bool) call_user_func( $update_callback );
-            $this->update_callback_end( $update_callback, $result );
-        }
-    }
-
-    /**
-     * Triggered when a callback will run.
-     *
-     * @param string $callback Callback name.
-     */
-    final protected function update_callback_start( $callback ) {
-        maybe_define_constant( strtoupper( $this->slug ) . '_UPDATING', true );
-    }
-
-    /**
-     * Triggered when a callback has ran.
-     *
-     * @param string $callback Callback name.
-     * @param bool   $result Return value from callback. Non-false need to run again.
-     */
-    final protected function update_callback_end( $callback, $result ) {
-        if ( $result ) {
-            as_schedule_single_action(
-                "{$this->slug}_run_update_callback",
-                array(
-                    'update_callback' => $callback,
-                ),
-                "{$this->slug}-db-updates"
-            );
-        }
+        $this->get_update_handler()->run_update_callback( $update_callback );
     }
 
     /**
@@ -544,93 +454,119 @@ abstract class Base_Plugin_Installer {
     }
 
     /**
-     * Get list of DB update callbacks.
-     *
-     * @since  3.0.0
-     * @return array
+     * Update plugin version to current.
      */
-    final public function get_db_update_callbacks() {
-        return $this->db_updates;
+    final public function update_plugin_version() {
+        update_option( "{$this->slug}_version", $this->version );
+    }
+
+    /**
+     * Update DB version to current.
+     *
+     * @param string|null $version New plugin DB version or null.
+     */
+    final public function update_db_version( $version = null ) {
+        $version = $version ?? $this->db_version;
+        if ( '0.0.0' !== $version ) {
+			update_option( "{$this->slug}_db_version", is_null( $version ) ? $this->version : $version );
+        }
     }
 
     /**
      * Adds a plugin update command to WP-CLI
      */
     public function register_commands() {
-
         WP_CLI::add_command( "{$this->slug} update", array( $this, 'cli_update' ) );
 
-        if ( $this->has_db_tables ) {
+        if ( $this->get_schema() ) {
             WP_CLI::add_command( "{$this->slug} verify_tables", array( $this, 'cli_verify_tables' ) );
         }
-
     }
 
+    // phpcs:disable Squiz.Commenting.FunctionComment.MissingParamTag
+
     /**
-     * CLI Update command
+     * Updates the plugin database to the latest version
+     *
+     * ## OPTIONS
+     *
+     * [--from=<version>]
+     * : Update the database from a specific version.
+     * ---
+     *
+     * [--force]
+     * : Force the update even if the database is already up to date.
      */
-    final public function cli_update() {
+    final public function cli_update( $args = array(), $assoc_args = array() ) {
+        $assoc_args = wp_parse_args(
+            $assoc_args,
+            array(
+				'force' => false,
+				'from'  => null,
+            )
+        );
+
         global $wpdb;
 
         $wpdb->hide_errors();
 
-        if ( '' !== $this->get_update_functions_file() ) {
-            include_once $this->get_update_functions_file();
-        }
+        $handler = $this->get_update_handler();
 
-        $current_db_version = get_option( "{$this->slug}_db_version", '0.0.1' );
-        $update_count       = 0;
-        $callbacks          = $this->get_db_update_callbacks();
-        $callbacks_to_run   = array();
+        $current_db_version = $assoc_args['from'] ??
+            ( $assoc_args['force'] ? '0.0.0' : get_option( "{$this->slug}_db_version", '0.0.1' ) );
 
-        foreach ( $callbacks as $version => $update_callbacks ) {
-            if ( version_compare( $current_db_version, $version, '<' ) ) {
-                foreach ( $update_callbacks as $update_callback ) {
-                    $callbacks_to_run[] = $update_callback;
-                }
-            }
-        }
+        $update_count     = 0;
+        $callbacks_to_run = $handler?->get_needed_update_callbacks( $current_db_version, $assoc_args['force'] ) ?? array();
 
         if ( empty( $callbacks_to_run ) ) {
             // Ensure DB version is set to the current plugin version to match WP-Admin update routine.
             $this->update_db_version();
             /* translators: %s Database version number */
-            WP_CLI::success( sprintf( __( 'No updates required. Database version is %s', 'oblak-plugin-installer' ), get_option( "{$this->slug}_db_version" ) ) );
+            WP_CLI::success( sprintf( __( 'No updates required. Database version is %s', 'oblak-plugin-installer' ), $current_db_version ) );
             return;
         }
 
         /* translators: 1: Number of database updates 2: List of update callbacks */
-        WP_CLI::log( sprintf( __( 'Found %1$d updates (%2$s)', 'oblak-plugin-installer' ), count( $callbacks_to_run ), implode( ', ', $callbacks_to_run ) ) );
+        WP_CLI::log( sprintf( __( 'Found %1$d updates (%2$s)', 'oblak-plugin-installer' ), count( $callbacks_to_run ), implode( ', ', wp_list_pluck( $callbacks_to_run, 'details' ) ) ) );
 
         $progress = make_progress_bar( __( 'Updating database', 'oblak-plugin-installer' ), count( $callbacks_to_run ) );
 
-        foreach ( $callbacks_to_run as $update_callback ) {
-            call_user_func( $update_callback );
-            $result = false;
-            while ( $result ) {
-                $result = (bool) call_user_func( $update_callback );
-            }
-            $update_count ++;
-            $progress->tick();
+        foreach ( $callbacks_to_run as $index => $callback_data ) {
+            // Translators: 1: update callback details, 2: update callback version, 3: update callback index, 4: total number of update callbacks.
+            $progress->tick( 0, sprintf( esc_html__( 'Updating to %2$s: %1$s (%3$d/%4$d)', 'oblak-plugin-installer' ), $callback_data['details'], WP_CLi::colorize( "%C{$callback_data['version']}%n" ), $index + 1, count( $callbacks_to_run ) ) );
+
+            $status = $handler->run_update_callback( $callback_data['method'] );
+            sleep( 3 );
+
+            $progress->tick( 1 );
+
+            $status && $update_count++;
         }
 
         $progress->finish();
 
         Admin_Notice_Manager::get_instance()->remove_notice( "{$this->slug}_update_notice", true );
 
-        /* translators: 1: Number of database updates performed 2: Database version number */
-        WP_CLI::success( sprintf( __( '%1$d update functions completed. Database version is %2$s', 'oblak-plugin-installer' ), absint( $update_count ), get_option( "{$this->slug}_db_version" ) ) );
+        WP_CLI::success(
+            sprintf(
+                /* translators: 1: Number of database updates performed 2: Database version number */
+                __( '%1$d update functions completed. Database version is %2$s', 'oblak-plugin-installer' ),
+                absint( $update_count ),
+                get_option( "{$this->slug}_db_version" )
+            )
+        );
     }
 
     /**
      * Runs the DB verification routine and outputs the results to the CLI.
      *
-     * @param array $args       Command arguments.
-     * @param array $assoc_args Command associative arguments.
+     * ## OPTIONS
+     *
+     * [--create]
+     * : Create the missing tables.
      */
     final public function cli_verify_tables( $args = array(), $assoc_args = array() ) {
         $results = $this->verify_base_tables();
-        $create  = isset( $assoc_args['create'] ) ? true : false;
 
         if ( empty( $results ) ) {
             WP_CLI::success( __( 'All database tables are up to date.', 'oblak-plugin-installer' ) );
@@ -644,7 +580,7 @@ abstract class Base_Plugin_Installer {
             WP_CLI::log( sprintf( __( 'Table %1$s: %2$s', 'oblak-plugin-installer' ), $table, __( 'Missing', 'oblak-plugin-installer' ) ) );
         }
 
-        if ( ! $create ) {
+        if ( ! $assoc_args['create'] ) {
             WP_CLI::line( __( 'Run the command again with --create to create the missing tables.', 'oblak-plugin-installer' ) );
             return;
         }

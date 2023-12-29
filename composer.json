@@ -8,39 +8,35 @@
         }
     ],
     "license": "GPL-2.0-only",
-    "version": "0.0.0",
+    "version": "2.0.2",
     "type": "library",
     "require": {
-        "php": ">= 7.3",
-        "automattic/jetpack-constants": "^1.6",
-        "woocommerce/action-scheduler": "^3.5",
-        "oblak/admin-notice-manager": "^2"
+        "php": ">= 8.0",
+        "automattic/jetpack-constants": "^2",
+        "oblak/admin-notice-manager": "^2",
+        "woocommerce/action-scheduler": "^3.7"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "*",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1 || ^1.0.0",
-        "wp-coding-standards/wpcs": "*",
-        "phpcompatibility/phpcompatibility-wp": "*"
+        "oblak/wordpress-coding-standard": "^1"
+    },
+    "suggest": {
+        "automattic/jetpack-autoloader": "Allow for better interoperability with other plugins that use this package."
     },
     "autoload": {
         "psr-4": {
             "Oblak\\WP\\": "src"
         },
         "files": [
-            "src/oblak-plugin-installer-utils.php"
+            "src/wppi-as-loader.php"
         ]
     },
     "config": {
+        "classmap-authoritative": true,
+        "optimize-autoloader": true,
+        "sort-packages": true,
         "allow-plugins": {
+            "automattic/jetpack-autoloader": true,
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
-    },
-    "scripts": {
-        "install-codestandards": [
-            "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
-        ],
-        "post-install-cmd": [
-            "@install-codestandards"
-        ]
     }
 }

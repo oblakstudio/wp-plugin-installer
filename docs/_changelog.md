@@ -1,3 +1,29 @@
+## [2.0.1](https://github.com/oblakstudio/wp-plugin-installer/compare/v2.0.0...v2.0.1) (2023-12-29)
+
+
+### Bug Fixes
+
+* Deps update ([4ee1c32](https://github.com/oblakstudio/wp-plugin-installer/commit/4ee1c32d63991e3955fdbc8cd961572d4e3d8d8a))
+
+# [2.0.0](https://github.com/oblakstudio/wp-plugin-installer/compare/v1.4.1...v2.0.0) (2023-12-29)
+
+
+### Features
+
+* Module rework ([b2304de](https://github.com/oblakstudio/wp-plugin-installer/commit/b2304deab8ef0e952586212f3d0c0f5f973c1792))
+
+
+### BREAKING CHANGES
+
+* Plugin updates go thru callback handler
+
+## [1.4.1](https://github.com/oblakstudio/wp-plugin-installer/compare/v1.4.0...v1.4.1) (2023-11-28)
+
+
+### Bug Fixes
+
+* Fixed update function callbacks ([40187fb](https://github.com/oblakstudio/wp-plugin-installer/commit/40187fbc9748c110a616a60fa325f92d11c5975f))
+
 # [1.4.0](https://github.com/oblakstudio/wp-plugin-installer/compare/v1.3.1...v1.4.0) (2023-10-01)
 
 
