@@ -12,7 +12,7 @@
     "type": "library",
     "require": {
         "php": ">= 8.0",
-        "automattic/jetpack-constants": "^1.6",
+        "automattic/jetpack-constants": "^2.0",
         "oblak/admin-notice-manager": "^2",
         "woocommerce/action-scheduler": "^3.7"
     },
