@@ -47,7 +47,7 @@ msgstr "Ажурирам базу података"
 #. translators: 1: Number of database updates performed 2: Database version number
 #: Base_Plugin_Installer.php:553
 msgid "%1$d update functions completed. Database version is %2$s"
-msgstr "%1$d ажурирања је извршено. Везрија базе података је %2$s"
+msgstr "%1$d ажурирања је извршено. Верзија базе података је %2$s"
 
 #: Base_Plugin_Installer.php:567 Base_Plugin_Installer.php:589
 msgid "All database tables are up to date."
