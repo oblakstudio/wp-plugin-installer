@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/oblakstudio/wp-plugin-installer/compare/v1.4.1...v2.0.0) (2023-12-29)
+
+
+### Features
+
+* Module rework ([b2304de](https://github.com/oblakstudio/wp-plugin-installer/commit/b2304deab8ef0e952586212f3d0c0f5f973c1792))
+
+
+### BREAKING CHANGES
+
+* Plugin updates go thru callback handler
+
 ## [1.4.1](https://github.com/oblakstudio/wp-plugin-installer/compare/v1.4.0...v1.4.1) (2023-11-28)
 
 
