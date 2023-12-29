@@ -9,7 +9,7 @@ if ( defined( 'ABSPATH' ) ) {
 	add_action(
         'plugins_loaded',
         function () {
-            require_once trailingslashit( __DIR__ ) . '../vendor/woocommerce/action-scheduler/action-scheduler.php';
+            require_once trailingslashit( realpath( __DIR__ . '/../../..' ) ) . '/woocommerce/action-scheduler/action-scheduler.php';
         },
         -10
 	);
