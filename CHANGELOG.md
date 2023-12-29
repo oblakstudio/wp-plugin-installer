@@ -1,3 +1,10 @@
+## [2.0.4](https://github.com/oblakstudio/wp-plugin-installer/compare/v2.0.3...v2.0.4) (2023-12-29)
+
+
+### Bug Fixes
+
+* Typo fix ([c79341f](https://github.com/oblakstudio/wp-plugin-installer/commit/c79341f97e20efac656150f3d12ab4d5ede16fd8))
+
 ## [2.0.3](https://github.com/oblakstudio/wp-plugin-installer/compare/v2.0.2...v2.0.3) (2023-12-29)
 
 
