@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/oblakstudio/wp-plugin-installer/compare/v1.4.0...v1.4.1) (2023-11-28)
+
+
+### Bug Fixes
+
+* Fixed update function callbacks ([40187fb](https://github.com/oblakstudio/wp-plugin-installer/commit/40187fbc9748c110a616a60fa325f92d11c5975f))
+
 # [1.4.0](https://github.com/oblakstudio/wp-plugin-installer/compare/v1.3.1...v1.4.0) (2023-10-01)
 
 
