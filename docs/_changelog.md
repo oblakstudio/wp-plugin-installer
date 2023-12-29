@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/oblakstudio/wp-plugin-installer/compare/v2.0.0...v2.0.1) (2023-12-29)
+
+
+### Bug Fixes
+
+* Deps update ([4ee1c32](https://github.com/oblakstudio/wp-plugin-installer/commit/4ee1c32d63991e3955fdbc8cd961572d4e3d8d8a))
+
 # [2.0.0](https://github.com/oblakstudio/wp-plugin-installer/compare/v1.4.1...v2.0.0) (2023-12-29)
 
 
