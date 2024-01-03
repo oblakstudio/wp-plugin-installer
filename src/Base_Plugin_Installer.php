@@ -127,6 +127,7 @@ abstract class Base_Plugin_Installer {
         add_action( 'init', array( $this, 'check_version' ) );
         add_action( 'admin_init', array( $this, 'install_actions' ) );
         add_action( 'cli_init', array( $this, 'register_commands' ) );
+        add_filter( 'woocommerce_debug_tools', array( $this, 'add_debug_tools' ), ( 99 + count( static::$instances ) ), 1 );
 
         add_action( "{$this->slug}_run_update_callback", array( $this, 'run_update_callback' ), 10, 2 );
     }
@@ -596,5 +597,45 @@ abstract class Base_Plugin_Installer {
         }
 
         WP_CLI::error( __( 'There was an error creating the missing tables.', 'oblak-plugin-installer' ) );
+    }
+
+    /**
+     * Add database verification to WooCommerce debug tools.
+     *
+     * @param  array<string, array> $tools Debug tools.
+     * @return array
+     */
+    final public function add_debug_tools( array $tools ): array {
+        if ( ! $this->get_schema() ) {
+            return $tools;
+        }
+
+        return array_merge(
+            $tools,
+            array(
+				"{$this->slug}_verify_db_tables" => array(
+                    'name'     => sprintf( '%s: %s', $this->name, __( 'Verify base database tables', 'woocommerce' ) ),
+					'desc'     => __( 'Verify if all base database tables are present.', 'woocommerce' ),
+                    'button'   => __( 'Verify database', 'woocommerce' ),
+					'callback' => array( $this, 'debug_verify_db_tables' ),
+
+                ),
+            )
+        );
+    }
+
+    /**
+     * Verify if all base database tables are present - from WooCommerce debug tools.
+     *
+     * @return string
+     */
+    final public function debug_verify_db_tables() {
+        Admin_Notice_Manager::get_instance()->remove_notice( "{$this->slug}_missing_tables", true );
+
+        $missing_tables = $this->verify_base_tables( false, true );
+
+        return 0 === count( $missing_tables )
+            ? __( 'Database verified successfully.', 'woocommerce' )
+            : __( 'Verifying database... One or more tables are still missing: ', 'woocommerce' ) . implode( ', ', $missing_tables );
     }
 }
