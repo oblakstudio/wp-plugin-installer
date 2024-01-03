@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/oblakstudio/wp-plugin-installer/compare/v2.0.4...v2.1.0) (2024-01-03)
+
+
+### Features
+
+* Added db verification to WooCommerce Tools ([97510f8](https://github.com/oblakstudio/wp-plugin-installer/commit/97510f8b99f7273496f4ebb1fb92147ed7a10880))
+
 ## [2.0.4](https://github.com/oblakstudio/wp-plugin-installer/compare/v2.0.3...v2.0.4) (2023-12-29)
 
 
