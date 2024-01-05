@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/oblakstudio/wp-plugin-installer/compare/v2.1.0...v2.1.1) (2024-01-05)
+
+
+### Bug Fixes
+
+* Instance basename sorted ([dfba698](https://github.com/oblakstudio/wp-plugin-installer/commit/dfba698486924c3b7680bf3ea6bb64e4a2298b22))
+
 # [2.1.0](https://github.com/oblakstudio/wp-plugin-installer/compare/v2.0.4...v2.1.0) (2024-01-03)
 
 
