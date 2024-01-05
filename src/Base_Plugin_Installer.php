@@ -90,7 +90,7 @@ abstract class Base_Plugin_Installer {
     private static function class_basename( $classname ) {
         $classname = is_object( $classname ) ? get_class( $classname ) : $classname;
 
-        return basename( str_replace( '\\', '/', $classname ) );
+        return str_replace( '\\', '/', $classname );
     }
 
     /**
