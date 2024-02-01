@@ -1,42 +1,43 @@
 {
-    "name": "oblak/wp-plugin-installer",
-    "description": "Simplifies the installation and activation of WordPress plugins",
-    "authors": [
-        {
-            "name": "Sibin Grasic",
-            "email": "sibin.grasic@oblak.studio"
-        }
-    ],
-    "license": "GPL-2.0-only",
-    "version": "2.1.1",
-    "type": "library",
-    "require": {
-        "php": ">= 8.0",
-        "automattic/jetpack-constants": "^2",
-        "oblak/admin-notice-manager": "^2",
-        "woocommerce/action-scheduler": "^3.7"
-    },
-    "require-dev": {
-        "oblak/wordpress-coding-standard": "^1"
-    },
-    "suggest": {
-        "automattic/jetpack-autoloader": "Allow for better interoperability with other plugins that use this package."
-    },
-    "autoload": {
-        "psr-4": {
-            "Oblak\\WP\\": "src"
-        },
-        "files": [
-            "src/wppi-as-loader.php"
-        ]
-    },
-    "config": {
-        "classmap-authoritative": true,
-        "optimize-autoloader": true,
-        "sort-packages": true,
-        "allow-plugins": {
-            "automattic/jetpack-autoloader": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        }
+  "name": "oblak/wp-plugin-installer",
+  "description": "Simplifies the installation and activation of WordPress plugins",
+  "license": "GPL-2.0-only",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Sibin Grasic",
+      "email": "sibin.grasic@oblak.studio"
     }
+  ],
+  "require": {
+    "php": ">= 8.0",
+    "automattic/jetpack-constants": "^2",
+    "oblak/admin-notice-manager": "^2",
+    "woocommerce/action-scheduler": "^3.7"
+  },
+  "require-dev": {
+    "ergebnis/composer-normalize": "^2.42",
+    "oblak/wordpress-coding-standard": "^1"
+  },
+  "suggest": {
+    "automattic/jetpack-autoloader": "Allow for better interoperability with other plugins that use this package."
+  },
+  "autoload": {
+    "psr-4": {
+      "Oblak\\WP\\": "src"
+    },
+    "files": [
+      "src/wppi-as-loader.php"
+    ]
+  },
+  "config": {
+    "allow-plugins": {
+      "automattic/jetpack-autoloader": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "ergebnis/composer-normalize": true
+    },
+    "classmap-authoritative": true,
+    "optimize-autoloader": true,
+    "sort-packages": true
+  }
 }

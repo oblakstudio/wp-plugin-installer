@@ -247,6 +247,8 @@ abstract class Base_Plugin_Installer {
     final public function verify_base_tables( $modify_notice = true, $execute = false ) {
         require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
+        global $wpdb;
+
         if ( $execute ) {
             $this->create_tables();
         }
@@ -255,9 +257,11 @@ abstract class Base_Plugin_Installer {
         $missing_tables = array();
 
         foreach ( $queries as $table_name => $result ) {
-            if ( "Created table {$table_name}" === $result ) {
-                $missing_tables[] = $table_name;
+            if ( is_numeric( $table_name ) || ! str_contains( $table_name, $wpdb->prefix ) ) {
+                continue;
             }
+
+            $missing_tables[] = strtok( $table_name, '.' );
         }
 
         if ( 0 < count( $missing_tables ) ) {
@@ -567,7 +571,13 @@ abstract class Base_Plugin_Installer {
      * : Create the missing tables.
      */
     final public function cli_verify_tables( $args = array(), $assoc_args = array() ) {
-        $results = $this->verify_base_tables();
+        $results    = $this->verify_base_tables();
+        $assoc_args = wp_parse_args(
+            $assoc_args,
+            array(
+                'create' => false,
+            )
+        );
 
         if ( empty( $results ) ) {
             WP_CLI::success( __( 'All database tables are up to date.', 'oblak-plugin-installer' ) );
