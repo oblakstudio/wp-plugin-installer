@@ -8,25 +8,25 @@
     "packages": [
         {
             "name": "automattic/jetpack-constants",
-            "version": "v2.0.0",
+            "version": "v2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Automattic/jetpack-constants.git",
-                "reference": "d4244e33d2d18902951af05ca5dbb689a23c9cdc"
+                "reference": "f6958c313a34c5e92171c45a57d9dc978e5975ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Automattic/jetpack-constants/zipball/d4244e33d2d18902951af05ca5dbb689a23c9cdc",
-                "reference": "d4244e33d2d18902951af05ca5dbb689a23c9cdc",
+                "url": "https://api.github.com/repos/Automattic/jetpack-constants/zipball/f6958c313a34c5e92171c45a57d9dc978e5975ed",
+                "reference": "f6958c313a34c5e92171c45a57d9dc978e5975ed",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.0"
             },
             "require-dev": {
-                "automattic/jetpack-changelogger": "^4.0.0",
+                "automattic/jetpack-changelogger": "^4.2.6",
                 "brain/monkey": "2.6.1",
-                "yoast/phpunit-polyfills": "1.1.0"
+                "yoast/phpunit-polyfills": "^1.1.1"
             },
             "suggest": {
                 "automattic/jetpack-autoloader": "Allow for better interoperability with other plugins that use this package."
@@ -53,9 +53,9 @@
             ],
             "description": "A wrapper for defining constants in a more testable way.",
             "support": {
-                "source": "https://github.com/Automattic/jetpack-constants/tree/v2.0.0"
+                "source": "https://github.com/Automattic/jetpack-constants/tree/v2.0.4"
             },
-            "time": "2023-11-20T20:02:28+00:00"
+            "time": "2024-08-23T14:28:14+00:00"
         },
         {
             "name": "oblak/admin-notice-manager",
