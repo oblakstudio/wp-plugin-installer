@@ -12,12 +12,13 @@
   "require": {
     "php": ">= 8.0",
     "automattic/jetpack-constants": "^2",
-    "oblak/admin-notice-manager": "^2",
-    "woocommerce/action-scheduler": "^3.7"
+    "woocommerce/action-scheduler": "^3.7",
+    "x-wp/admin-notice-manager": "^1.0"
   },
   "require-dev": {
     "ergebnis/composer-normalize": "^2.42",
-    "oblak/wordpress-coding-standard": "^1"
+    "oblak/wordpress-coding-standard": "^1",
+    "wp-cli/wp-cli": "^2.11"
   },
   "suggest": {
     "automattic/jetpack-autoloader": "Allow for better interoperability with other plugins that use this package."
@@ -31,6 +32,9 @@
     ]
   },
   "config": {
+    "platform": {
+      "php": "8.0"
+    },
     "allow-plugins": {
       "automattic/jetpack-autoloader": true,
       "dealerdirect/phpcodesniffer-composer-installer": true,

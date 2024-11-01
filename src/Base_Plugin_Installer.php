@@ -275,22 +275,24 @@ abstract class Base_Plugin_Installer {
             return;
         }
 
-        Admin_Notice_Manager::get_instance()->add_notice(
-            "{$this->slug}_missing_tables",
-            array(
-                'caps'        => 'manage_woocommerce',
-                'dismissible' => false,
-                'message'     => \sprintf(
-                    '<p><strong>%s</strong> - %s: %s</p>',
-                    \esc_html( $this->slug ),
-                    \esc_html__( 'The following tables are missing: ', 'oblak-plugin-installer' ),
-                    \implode( ', ', $missing_tables ),
+        \xwp_get_notice( "{$this->slug}_missing_tables" )
+            ->set_defaults()
+            ->set_props(
+                array(
+                    'caps'        => 'manage_woocommerce',
+                    'classes'     => 'alt',
+                    'dismissible' => false,
+                    'message'     => \sprintf(
+                        '<p><strong>%s</strong> - %s: %s</p>',
+                        \esc_html( $this->slug ),
+                        \esc_html__( 'The following tables are missing: ', 'oblak-plugin-installer' ),
+                        \implode( ', ', $missing_tables ),
+                    ),
+                    'persistent'  => true,
+                    'type'        => 'error',
                 ),
-                'persistent'  => true,
-                'type'        => 'error',
-            ),
-            true,
-        );
+            )
+            ->save( true );
     }
 
     /**
@@ -312,7 +314,7 @@ abstract class Base_Plugin_Installer {
         if ( 0 < \count( $missing_tables ) ) {
             $this->display_missing_tables_notice( $modify_notice );
         } elseif ( $modify_notice && $this->show_admin_notices ) {
-                Admin_Notice_Manager::get_instance()->remove_notice( "{$this->slug}_missing_tables", true );
+                \xwp_delete_notice( "{$this->slug}_missing_tables", true );
 		} else {
             \update_option( "{$this->slug}_schema_version", $this->db_version );
         }
@@ -416,18 +418,19 @@ abstract class Base_Plugin_Installer {
         $file = $this->get_template_file( $name );
         $args = $this->get_notice_args( $name );
 
-        Admin_Notice_Manager::get_instance()->add_notice(
-            "{$this->slug}_update_notice",
-            array(
-                'caps'        => 'manage_options',
-                'dismissible' => 'update-complete' === $file,
-                'file_args'   => $args,
-                'message'     => $file,
-                'persistent'  => false,
-                'type'        => 'info',
-            ),
-            true,
-        );
+        \xwp_get_notice( "{$this->slug}_update_notice" )
+            ->set_defaults()
+            ->set_props(
+                array(
+                    'caps'        => 'manage_options',
+                    'dismissible' => 'update-complete' === $file,
+                    'params'      => $args,
+                    'persistent'  => false,
+                    'template'    => $file,
+                    'type'        => 'info',
+                ),
+            )
+            ->save( true );
     }
 
     /**
@@ -637,7 +640,7 @@ abstract class Base_Plugin_Installer {
 
         $progress->finish();
 
-        Admin_Notice_Manager::get_instance()->remove_notice( "{$this->slug}_update_notice", true );
+        \xwp_delete_notice( "{$this->slug}_update_notice", true );
 
         WP_CLI::success(
             \sprintf(
@@ -740,7 +743,7 @@ abstract class Base_Plugin_Installer {
      * @return string
      */
     public function debug_verify_db_tables() {
-        Admin_Notice_Manager::get_instance()->remove_notice( "{$this->slug}_missing_tables", true );
+        \xwp_delete_notice( "{$this->slug}_missing_tables", true );
 
         $missing_tables = $this->verify_base_tables( false, true );
 
