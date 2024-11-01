@@ -102,16 +102,16 @@
         },
         {
             "name": "x-wp/admin-notice-manager",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/x-wp/admin-notice-manager.git",
-                "reference": "378d04ee7cdf999199fe87690617420e9a367c24"
+                "reference": "61bfbf90f90117d24af5130bbc80911b1c10f3cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/x-wp/admin-notice-manager/zipball/378d04ee7cdf999199fe87690617420e9a367c24",
-                "reference": "378d04ee7cdf999199fe87690617420e9a367c24",
+                "url": "https://api.github.com/repos/x-wp/admin-notice-manager/zipball/61bfbf90f90117d24af5130bbc80911b1c10f3cc",
+                "reference": "61bfbf90f90117d24af5130bbc80911b1c10f3cc",
                 "shasum": ""
             },
             "require": {
@@ -167,9 +167,9 @@
             ],
             "support": {
                 "issues": "https://github.com/x-wp/admin-notice-manager/issues",
-                "source": "https://github.com/x-wp/admin-notice-manager/tree/v1.0.0"
+                "source": "https://github.com/x-wp/admin-notice-manager/tree/v1.0.1"
             },
-            "time": "2024-11-01T11:46:27+00:00"
+            "time": "2024-11-01T13:09:35+00:00"
         },
         {
             "name": "x-wp/helper-functions",
@@ -1969,13 +1969,13 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">= 8.0"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "platform-overrides": {
         "php": "8.0"
     },
