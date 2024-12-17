@@ -102,16 +102,16 @@
         },
         {
             "name": "x-wp/admin-notice-manager",
-            "version": "v1.0.0",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/x-wp/admin-notice-manager.git",
-                "reference": "378d04ee7cdf999199fe87690617420e9a367c24"
+                "reference": "6751e677947480950c086d8bff7c555cab23eec7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/x-wp/admin-notice-manager/zipball/378d04ee7cdf999199fe87690617420e9a367c24",
-                "reference": "378d04ee7cdf999199fe87690617420e9a367c24",
+                "url": "https://api.github.com/repos/x-wp/admin-notice-manager/zipball/6751e677947480950c086d8bff7c555cab23eec7",
+                "reference": "6751e677947480950c086d8bff7c555cab23eec7",
                 "shasum": ""
             },
             "require": {
@@ -167,22 +167,22 @@
             ],
             "support": {
                 "issues": "https://github.com/x-wp/admin-notice-manager/issues",
-                "source": "https://github.com/x-wp/admin-notice-manager/tree/v1.0.0"
+                "source": "https://github.com/x-wp/admin-notice-manager/tree/v1.0.2"
             },
-            "time": "2024-11-01T11:46:27+00:00"
+            "time": "2024-12-16T23:04:19+00:00"
         },
         {
             "name": "x-wp/helper-functions",
-            "version": "v1.18.0",
+            "version": "v1.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/x-wp/helper-functions.git",
-                "reference": "1e3392e49d0fe95eb13e8980081b9ceb0268e0bd"
+                "reference": "edd258d0b2ad90a78893ffcabf6626cebf56a281"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/x-wp/helper-functions/zipball/1e3392e49d0fe95eb13e8980081b9ceb0268e0bd",
-                "reference": "1e3392e49d0fe95eb13e8980081b9ceb0268e0bd",
+                "url": "https://api.github.com/repos/x-wp/helper-functions/zipball/edd258d0b2ad90a78893ffcabf6626cebf56a281",
+                "reference": "edd258d0b2ad90a78893ffcabf6626cebf56a281",
                 "shasum": ""
             },
             "require": {
@@ -225,13 +225,13 @@
             ],
             "support": {
                 "issues": "https://github.com/x-wp/helper-functions/issues",
-                "source": "https://github.com/x-wp/helper-functions/tree/v1.18.0"
+                "source": "https://github.com/x-wp/helper-functions/tree/v1.18.1"
             },
-            "time": "2024-10-29T22:53:16+00:00"
+            "time": "2024-11-04T00:58:34+00:00"
         },
         {
             "name": "x-wp/helper-traits",
-            "version": "v1.18.0",
+            "version": "v1.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/x-wp/helper-traits.git",
@@ -277,7 +277,7 @@
             ],
             "support": {
                 "issues": "https://github.com/x-wp/helper-traits/issues",
-                "source": "https://github.com/x-wp/helper-traits/tree/v1.18.0"
+                "source": "https://github.com/x-wp/helper-traits/tree/v1.18.1"
             },
             "time": "2024-09-18T12:43:44+00:00"
         }
@@ -1969,13 +1969,13 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">= 8.0"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "platform-overrides": {
         "php": "8.0"
     },
