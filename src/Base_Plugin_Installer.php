@@ -9,6 +9,7 @@
 namespace Oblak\WP;
 
 use Automattic\Jetpack\Constants;
+use Closure;
 use Oblak\WP\Admin_Notice_Manager;
 use WP_CLI;
 
@@ -30,7 +31,14 @@ abstract class Base_Plugin_Installer {
      *
      * @var string
      */
-    protected $name = '';
+    protected $name;
+
+    /**
+     * Translatable plugin name
+     *
+     * @var Closure(): string
+     */
+    protected Closure $tr_name;
 
     /**
      * Plugin slug for use in filters, actions and database keys
@@ -77,6 +85,19 @@ abstract class Base_Plugin_Installer {
      */
     final public static function instance() {
         return static::$instances[ static::class_basename( static::class ) ] ??= new static();
+    }
+
+    /**
+     * Get the plugin name
+     *
+     * @return string
+     */
+    protected function get_name(): string {
+        if ( ! isset( $this->name ) ) {
+            $this->name = isset( $this->tr_name ) ? ( $this->tr_name )() : '';
+        }
+
+        return $this->name;
     }
 
     /**
@@ -364,7 +385,7 @@ abstract class Base_Plugin_Installer {
         $file_args = array(
             'cli_update_faq' => '#',
             'how_to_update'  => '#',
-            'plugin_name'    => $this->name,
+            'plugin_name'    => $this->get_name(),
             'plugin_slug'    => $this->slug,
             'scheduler_url'  => "tools.php?page=action-scheduler&s={$this->slug}_run_update&status=pending",
             'update_url'     => '',
@@ -728,7 +749,7 @@ abstract class Base_Plugin_Installer {
                     'desc'     => \__( 'Verify if all base database tables are present.', 'woocommerce' ),
                     'name'     => \sprintf(
                         '%s: %s',
-                        $this->name,
+                        $this->get_name(),
                         \__( 'Verify base database tables', 'woocommerce' ),
                     ),
 
