@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f2079bdb6f3e8be921a7d0471eab0501",
+    "content-hash": "898ca24483ac8976fcead5242eb3adf0",
     "packages": [
         {
             "name": "automattic/jetpack-constants",
@@ -231,7 +231,7 @@
         },
         {
             "name": "x-wp/helper-traits",
-            "version": "v1.18.0",
+            "version": "v1.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/x-wp/helper-traits.git",
@@ -277,7 +277,7 @@
             ],
             "support": {
                 "issues": "https://github.com/x-wp/helper-traits/issues",
-                "source": "https://github.com/x-wp/helper-traits/tree/v1.18.0"
+                "source": "https://github.com/x-wp/helper-traits/tree/v1.18.1"
             },
             "time": "2024-09-18T12:43:44+00:00"
         }

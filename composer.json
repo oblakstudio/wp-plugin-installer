@@ -13,7 +13,8 @@
     "php": ">= 8.0",
     "automattic/jetpack-constants": "^2",
     "woocommerce/action-scheduler": "^3.7",
-    "x-wp/admin-notice-manager": "^1.0"
+    "x-wp/admin-notice-manager": "^1.0",
+    "x-wp/helper-traits": "^1.18"
   },
   "require-dev": {
     "ergebnis/composer-normalize": "^2.42",

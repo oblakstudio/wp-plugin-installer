@@ -1,4 +1,4 @@
-<?php //phpcs:disable WordPress.WP.I18n.TextDomainMismatch
+<?php //phpcs:disable WordPress.WP.I18n.TextDomainMismatch, SlevomatCodingStandard.Functions.RequireMultiLineCall.RequiredMultiLineCall
 /**
  * Base_Installer class file.
  *
@@ -10,8 +10,8 @@ namespace Oblak\WP;
 
 use Automattic\Jetpack\Constants;
 use Closure;
-use Oblak\WP\Admin_Notice_Manager;
 use WP_CLI;
+use XWP\Helper\Traits\Singleton_Ex;
 
 use function WP_CLI\Utils\make_progress_bar;
 
@@ -19,12 +19,14 @@ use function WP_CLI\Utils\make_progress_bar;
  * Base Installer class from which all installers derive.
  */
 abstract class Base_Plugin_Installer {
+    use Singleton_Ex;
+
     /**
-     * Class instance
+     * Did we load the text domain
      *
-     * @var Base_Plugin_Installer[]
+     * @var bool
      */
-    protected static $instances = array();
+    protected static bool $tdm;
 
     /**
      * Full plugin name
@@ -69,22 +71,19 @@ abstract class Base_Plugin_Installer {
     protected $show_admin_notices = true;
 
     /**
+     * Did we initialize the installer
+     *
+     * @var bool
+     */
+    protected bool $run;
+
+    /**
      * Class constructor
      */
     protected function __construct() {
         $this->set_defaults();
         $this->verify_defaults();
-
-        $this->db_version ??= $this->version;
-    }
-
-    /**
-     * Returns the singleton instance
-     *
-     * @return static
-     */
-    final public static function instance() {
-        return static::$instances[ static::class_basename( static::class ) ] ??= new static();
+        $this->init();
     }
 
     /**
@@ -98,18 +97,6 @@ abstract class Base_Plugin_Installer {
         }
 
         return $this->name;
-    }
-
-    /**
-     * Get the class "basename" of the given object / class.
-     *
-     * @param  string|object $classname Class name or object.
-     * @return string
-     */
-    private static function class_basename( $classname ) {
-        $classname = \is_object( $classname ) ? $classname::class : $classname;
-
-        return \str_replace( '\\', '/', $classname );
     }
 
     /**
@@ -136,24 +123,21 @@ abstract class Base_Plugin_Installer {
         if ( '' === $this->db_version && '' !== $this->get_schema() ) {
             throw new \Exception( \esc_html__( 'Plugin schema version not set', 'oblak-plugin-installer' ) );
         }
+
+        $this->db_version ??= $this->version;
     }
 
     /**
      * Initialize and hook me baby one more time
      */
     public function init() {
-        \add_action( 'init', array( $this, 'load_textdomain' ) );
-        \add_action( 'init', array( $this, 'check_version' ) );
-        \add_action( 'admin_init', array( $this, 'install_actions' ) );
-        \add_action( 'cli_init', array( $this, 'register_commands' ) );
-        \add_filter(
-            'woocommerce_debug_tools',
-            array( $this, 'add_debug_tools' ),
-            99 + \count( static::$instances ),
-            1,
-        );
-
-        \add_action( "{$this->slug}_run_update_callback", array( $this, 'run_update_callback' ), 10, 2 );
+        self::$tdm ??= \add_action( 'init', array( $this, 'load_textdomain' ) );
+        $this->run ??=
+            \add_action( 'init', array( $this, 'check_version' ) ) &&
+            \add_action( 'admin_init', array( $this, 'install_actions' ) ) &&
+            \add_action( 'cli_init', array( $this, 'register_commands' ) ) &&
+            \add_action( "{$this->slug}_run_update_callback", array( $this, 'run_update_callback' ), 10, 2 ) &&
+            \add_filter( 'woocommerce_debug_tools', array( $this, 'add_debug_tools' ), 99 + \count( static::$instance ), 1 );
     }
 
     /**
