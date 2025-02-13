@@ -231,7 +231,7 @@
         },
         {
             "name": "x-wp/helper-traits",
-            "version": "v1.18.1",
+            "version": "v1.19.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/x-wp/helper-traits.git",
@@ -277,7 +277,7 @@
             ],
             "support": {
                 "issues": "https://github.com/x-wp/helper-traits/issues",
-                "source": "https://github.com/x-wp/helper-traits/tree/v1.18.1"
+                "source": "https://github.com/x-wp/helper-traits/tree/v1.19.6"
             },
             "time": "2024-09-18T12:43:44+00:00"
         }
@@ -1969,13 +1969,13 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">= 8.0"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "platform-overrides": {
         "php": "8.0"
     },
