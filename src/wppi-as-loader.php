@@ -10,8 +10,8 @@ if ( ! function_exists( 'wppi_load_as' ) && function_exists( 'add_action' ) ) :
     /**
      * Load the Action Scheduler library.
      */
-    function wppi_load_as() {
-        if ( function_exists( 'WC' ) || function_exists( 'action_scheduler_register_3_dot_7_dot_1' ) ) {
+    function wppi_load_as(): void {
+        if ( function_exists( 'WC' ) || function_exists( 'action_scheduler_register_3_dot_9_dot_2' ) ) {
             return;
         }
 
