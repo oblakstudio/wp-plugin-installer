@@ -7,7 +7,6 @@
 
 if ( ! function_exists( 'wppi_load_as' ) && function_exists( 'add_action' ) ) :
 
-
     /**
      * Load the Action Scheduler library.
      */
@@ -20,9 +19,22 @@ if ( ! function_exists( 'wppi_load_as' ) && function_exists( 'add_action' ) ) :
             ? realpath( __DIR__ . '/../../..' )
             : realpath( __DIR__ . '/../vendor' );
 
-        require_once $base . '/woocommerce/action-scheduler/action-scheduler.php';
-    }
+        $path = $base . '/woocommerce/action-scheduler/action-scheduler.php';
 
+        if ( file_exists( $path ) ) {
+            require_once $path;
+            return;
+        }
+
+        // Try one more time.
+        $base = realpath( __DIR__ . '/../../../../vendor' );
+        $path = $base . '/woocommerce/action-scheduler/action-scheduler.php';
+
+        if ( file_exists( $path ) ) {
+            require_once $path;
+            return;
+        }
+    }
     add_action( 'plugins_loaded', 'wppi_load_as', -10, 0 );
 
 endif;
