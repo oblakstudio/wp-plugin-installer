@@ -232,16 +232,16 @@
         },
         {
             "name": "x-wp/helper-traits",
-            "version": "v1.19.6",
+            "version": "v1.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/x-wp/helper-traits.git",
-                "reference": "0367d136d6ba36e2ae0fe1854584ef760ea7cae9"
+                "reference": "c341b8ad27de9b1a73e2d53dc8702897a0cfba18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/x-wp/helper-traits/zipball/0367d136d6ba36e2ae0fe1854584ef760ea7cae9",
-                "reference": "0367d136d6ba36e2ae0fe1854584ef760ea7cae9",
+                "url": "https://api.github.com/repos/x-wp/helper-traits/zipball/c341b8ad27de9b1a73e2d53dc8702897a0cfba18",
+                "reference": "c341b8ad27de9b1a73e2d53dc8702897a0cfba18",
                 "shasum": ""
             },
             "require": {
@@ -278,9 +278,15 @@
             ],
             "support": {
                 "issues": "https://github.com/x-wp/helper-traits/issues",
-                "source": "https://github.com/x-wp/helper-traits/tree/v1.19.6"
+                "source": "https://github.com/x-wp/helper-traits/tree/v1.21.0"
             },
-            "time": "2024-09-18T12:43:44+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/seebeen",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-06-08T10:17:19+00:00"
         }
     ],
     "packages-dev": [
@@ -1511,13 +1517,13 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">= 8.0"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "platform-overrides": {
         "php": "8.0"
     },
